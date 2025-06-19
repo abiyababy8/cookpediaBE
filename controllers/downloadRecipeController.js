@@ -1,7 +1,7 @@
 const downloadRecipes = require('../models/downloadModel')
 exports.addToDownloadRecipeController = async (req, res) => {
     const { id } = req.params
-    const userId = req.payload
+    const userId = req.userId
     const { name, image, cuisine } = req.body
     console.log(id, userId, name, image, cuisine)
     try {
