@@ -51,3 +51,17 @@ exports.loginUserController = async (req, res) => {
         res.status(406).json(error)
     }
 }
+exports.editUserController = async (req, res) => {
+    const { profilePic } = req.body
+    const userId = req.userId
+    try {
+        const existingUser = await users.findById({ _id: userId })
+        if (existingUser) {
+            existingUser.profilePic = profilePic
+            await existingUser.save()
+            res.status(201).json(existingUser)
+        }
+    } catch (error) {
+        res.status(401).json(error)
+    }
+}

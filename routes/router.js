@@ -26,5 +26,7 @@ router.post('/recipe/:id/save',jwtMiddleware,saveRecipeController.addToSavedReci
 router.get('/get-saved-recipes',jwtMiddleware,saveRecipeController.getUserSavedRecipeController)
 //delete saved recipe
 router.delete('/recipe/:id/remove',jwtMiddleware,saveRecipeController.removeSaveRecipeController)
+//upload profile pic
+router.post('/user/edit',jwtMiddleware,userController.editUserController)
 
 module.exports = router;
