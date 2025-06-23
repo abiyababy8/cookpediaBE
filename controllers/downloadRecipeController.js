@@ -24,3 +24,11 @@ exports.addToDownloadRecipeController = async (req, res) => {
         res.status(401).json(error)
     }
 }
+exports.getAllDownloadListController = async (req, res) => {
+    try {
+        const allDownloads = await downloadRecipes.find()
+        res.status(200).json(allDownloads)
+    } catch (error) {
+        res.status(401).json(error)
+    }
+}

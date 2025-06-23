@@ -43,6 +43,18 @@ exports.loginUserController = async (req, res) => {
                     res.status(404).json("Invalid password")
                 }
             }
+            else if (existingUser.role === 'Admin') {
+                const adminDetails = await users.findOne({ email: email, password: password })
+                if (adminDetails) {
+                    console.log("Admin Details:")
+                    console.log(adminDetails)
+                    const token = jwt.sign({ userId: adminDetails._id }, process.env.JWT_PWD)
+                    res.status(200).json({ user: adminDetails, token: token })
+                }
+                else {
+                    res.status(401).json("Invalid Email or Password")
+                }
+            }
         }
         else {
             res.status(404).json("Invalid Email")
@@ -61,6 +73,14 @@ exports.editUserController = async (req, res) => {
             await existingUser.save()
             res.status(201).json(existingUser)
         }
+    } catch (error) {
+        res.status(401).json(error)
+    }
+}
+exports.getAllUsersController = async (req, res) => {
+    try {
+        const allusers = await users.find().skip(1)
+        res.status(200).json(allusers)
     } catch (error) {
         res.status(401).json(error)
     }
