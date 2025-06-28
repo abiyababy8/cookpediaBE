@@ -38,5 +38,7 @@ router.get('/all-feedbacks', jwtMiddleware, testimonyController.getAllFeedbackCo
 router.get('/feedback/:id/update', jwtMiddleware, testimonyController.updateFeedbackStatusController)
 // get approved feedbacks
 router.get('/all-approved-feedbacks', testimonyController.getApprovedFeedbackController)
-
+router.post('/add-recipe',jwtMiddleware,recipeController.addRecipeController)
+router.put('/recipe/:id/edit',jwtMiddleware,recipeController.updateRecipeController)
+router.delete('/recipe/:id/delete',jwtMiddleware,recipeController.removeRecipeController)
 module.exports = router;
